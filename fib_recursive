@@ -1,0 +1,44 @@
+import time
+
+
+def fib(n):
+    """
+    Рекурсивная функция для вычисления n-го числа Фибоначчи.
+    Принимает целое число n (0 <= n <= 24) и возвращает соответствующее число.
+    """
+    # Если n равно 0 или 1, возвращаем n
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    # Рекурсивный случай: F(n) = F(n-1) + F(n-2)
+    else:
+        return fib(n - 1) + fib(n - 2)
+
+
+def measure_time(n):
+    """
+    Функция для замера времени выполнения с точностью до миллисекунды.
+    """
+    start_time = time.time()
+    result = fib(n)
+    end_time = time.time()
+
+    # Вычисляем время в миллисекундах
+    execution_time_ms = (end_time - start_time) * 1000
+
+    return result, execution_time_ms
+
+
+# Основная часть программы: тестирование и замеры
+print("Вычисление чисел Фибоначчи с помощью рекурсии")
+print("=" * 50)
+
+# Выбираем произвольные значения n для замеров (в пределах 1 <= n <= 24)
+test_values = [5, 10, 15, 20, 24]
+
+for n in test_values:
+    result, time_ms = measure_time(n)
+    print(f"fib({n}) = {result} | Время выполнения: {time_ms:.4f} мс")
+
+print("\n" + "=" * 50)
