@@ -23,7 +23,7 @@ except ValueError as e:
     print(f"Ошибка: {e}")
 
 # замерить время выполнения алгоритма с точностью до миллисекунды любым доступным способом для пяти произвольных n
-test_values = [5, 10, 15, 20, 24]
+test_values = [5, 10, 15, 20, 24] #Выбранные числа
 for n in test_values:
     start_time = time.time()
     result = fib(n)
