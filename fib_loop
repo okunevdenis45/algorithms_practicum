@@ -1,54 +1,35 @@
 import time
 
-
 def fib(n):
-    """
-    Функция для вычисления n-го числа Фибоначчи с использованием цикла.
-    Принимает целое число n (1 <= n <= 32) и выводит результат на экран.
-    """
-    # Базовые случаи
-    if n == 1:
-        print(1)
-        return
-    elif n == 2:
-        print(1)
-        return
+    if int(n) == 0:
+        return 0
+    elif int(n) == 1:
+        return 1
 
-    # Инициализируем первые два числа последовательности
-    prev = 1  # F(1)
-    curr = 1  # F(2)
+    fib0, fib1 = 0, 1
+    if 1 <= int(n) <= 32:
+        for _ in range(2, int(n) + 1):
+            fib0, fib1 = fib1, fib0 + fib1
+        return fib1
+    else:
+        raise ValueError("Число n должно быть в диапазоне 1 <= n <= 32")
 
-    # Цикл от 3 до n (включительно)
-    for i in range(3, n + 1):
-        next_fib = prev + curr  # Вычисляем следующее число
-        prev = curr  # Сдвигаем "окно": предыдущее становится текущим
-        curr = next_fib  # текущее становится следующим
+n = input('Введите число: ')
 
-    print(curr)  # Выводим итоговое n-ое число
-
-
-def measure_time(n):
-    """
-    Функция для замера времени выполнения с точностью до миллисекунды.
-    """
+try:
     start_time = time.time()
-    fib(n)
+    result = fib(n)
     end_time = time.time()
 
-    # Вычисляем время в миллисекундах
-    execution_time_ms = (end_time - start_time) * 1000
-    return execution_time_ms
+    print(f"Число Фибоначчи {n}: {result}")
+    print(f"Время выполнения: {end_time - start_time:.6f} секунд")
+except ValueError as e:
+    print(f"Ошибка: {e}")
 
-
-# Основная часть программы: тестирование и замеры
-print("Вычисление чисел Фибоначчи с помощью цикла")
-print("=" * 50)
-
-# Выбираем произвольные значения n для замеров (в пределах 1 <= n <= 32)
-test_values = [5, 10, 15, 25, 32]
-
+#замерить время выполнения алгоритма с точностью до миллисекунды любым доступным способом для пяти произвольных n
+test_values = [5, 10, 20, 25, 32] #Выбранные числа
 for n in test_values:
-    time_ms = measure_time(n)
-    print(f"fib({n}) | Время выполнения: {time_ms:.6f} мс")
-
-print("\n" + "=" * 50)
+    start_time = time.time()
+    result = fib(n)
+    end_time = time.time()
+    print(f"fib({n}) = {result}, время выполнения: {(end_time - start_time) * 1000:.3f} мс")
