@@ -1,0 +1,16 @@
+import math
+
+def fib(n):
+    if n < 1 or n > 64:
+        raise ValueError("n должно быть в диапазоне от 1 до 64.")
+    
+    # Формула Бине
+    phi = (1 + math.sqrt(5)) / 2
+    psi = (1 - math.sqrt(5)) / 2
+    fibonacci_number = (phi**n - psi**n) / math.sqrt(5)
+    
+    # Округляем результат
+    return round(fibonacci_number)
+
+# Пример вызова функции
+print(fib(32))  # Должно вывести 2178309
