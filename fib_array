@@ -1,19 +1,13 @@
 def fib(n):
-    # Создаем массив для хранения чисел Фибоначчи
-    fibonacci_array = [0] * (n + 1)
+    array = [0, 1]
 
-    # Определяем первые два числа Фибоначчи
-    if n >= 0:
-        fibonacci_array[0] = 0
-    if n >= 1:
-        fibonacci_array[1] = 1
+    if 1 <= int(n) <= 40:
+        for i in range(2, int(n) + 1):
+            array.append(array[-1] + array[-2])
+        return array
+    else:
+        raise ValueError("Число n должно быть в диапазоне 1 <= n <= 40")
 
-    # Вычисляем числа Фибоначчи и сохраняем их в массиве
-    for i in range(2, n + 1):
-        fibonacci_array[i] = fibonacci_array[i - 1] + fibonacci_array[i - 2]
-
-    # Выводим массив
-    print(fibonacci_array)
-
-# Пример вызова функции
-fib(8)
+n = input('Введите число: ')
+result = fib(n)
+print(f"array({n}) = {result}")
