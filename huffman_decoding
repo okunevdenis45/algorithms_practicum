@@ -1,0 +1,33 @@
+def huffman_decode():
+    # Входные данные
+    n, length = map(int, input().split())
+    codes = {}
+    for _ in range(n):
+        line = input()
+        # строка вида "'symbol': code"
+        # символ может быть пробелом, апострофом или точкой и т.п.
+        # разделим по двоеточию
+        symbol_part, code = line.split(': ')
+        # символ в апострофах, вырежем
+        symbol = symbol_part[1:-1]
+        codes[code] = symbol
+
+    encoded_str = input()
+
+    # Декодирование
+    res = []
+    tmp = ""
+    for c in encoded_str:
+        tmp += c
+        if tmp in codes:
+            res.append(codes[tmp])
+            tmp = ""
+
+    print(''.join(res))
+
+
+# Запускаем декодирование
+huffman_decode()
+# Инструкция:Вставляем сначала два целых числа через пробел: первое число — количество различных букв встречающихся в строке, второе число — размер получившейся закодированной строки
+# Далее вставляем коды символов в формате "'symbol': code"
+# и в конце вставляем закодированную строку
