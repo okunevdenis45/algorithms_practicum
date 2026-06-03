@@ -1,3 +1,4 @@
+import time
 def fib(n):
     if int(n) == 0:
         return 0
