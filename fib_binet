@@ -1,16 +1,17 @@
 import math
 
 def fib(n):
-    if n < 1 or n > 64:
-        raise ValueError("n должно быть в диапазоне от 1 до 64.")
-    
-    # Формула Бине
-    phi = (1 + math.sqrt(5)) / 2
-    psi = (1 - math.sqrt(5)) / 2
-    fibonacci_number = (phi**n - psi**n) / math.sqrt(5)
-    
-    # Округляем результат
-    return round(fibonacci_number)
+    if 1 <= int(n) <= 64:
+        m_sqrt5 = math.sqrt(5)
+        a = (1 + m_sqrt5) / 2
+        b = (1 - m_sqrt5) / 2
+        result = (a**int(n) - b**int(n)) / m_sqrt5
+        # Округляем результат
+        return round(result)
+    else:
+        raise ValueError("Число n должно быть в диапазоне 1 <= n <= 64")
 
-# Пример вызова функции
-print(fib(32))  # Должно вывести 2178309
+
+n = input('Введите число: ')
+result = fib(n)
+print(f"Число Фибоначчи({n}) = {result}")
