@@ -1,0 +1,48 @@
+from collections import Counter, deque
+import heapq
+
+def huffman_encode():
+    text = "Errare humanum est."
+
+    # 1. Частоты символов
+    freq = Counter(text)
+
+    # 2. Построение дерева Хаффмана (используем кучу)
+    # Каждая запись: (частота, id, узел)
+    # id нужно, чтобы различать узлы с одинаковой частотой
+    heap = []
+    count = 0
+    for ch, fr in freq.items():
+        heapq.heappush(heap, (fr, count, ch))
+        count += 1
+
+    while len(heap) > 1:
+        fr1, _id1, left = heapq.heappop(heap)
+        fr2, _id2, right = heapq.heappop(heap)
+        heapq.heappush(heap, (fr1 + fr2, count, (left, right)))
+        count += 1
+
+    # 3. Рекурсивная функция для получения кодов символов
+    codes = {}
+    def get_codes(node, prefix=''):
+        if isinstance(node, str):
+            codes[node] = prefix if prefix else '0'  # случай одного символа
+            return
+        left, right = node
+        get_codes(left, prefix + '0')
+        get_codes(right, prefix + '1')
+
+    root = heap[0][2]
+    get_codes(root)
+
+    # 4. Кодируем строку
+    encoded_str = ''.join(codes[ch] for ch in text)
+
+    # 5. Вывод
+    print(len(codes), len(encoded_str))
+    # Сортируем по коду для (как в примере)
+    for ch in sorted(codes, key=lambda x: (len(codes[x]), codes[x])):
+        print(f"'{ch}': {codes[ch]}")
+    print(encoded_str)
+
+huffman_encode()
